@@ -1,0 +1,168 @@
+--[[
+
+
+SCRIPT CREATED BY LE0
+
+
+DISCORD le0_skilled
+
+
+--]]
+
+
+
+--if game.PlaceId == 9780994092 then
+
+-- The GUIs
+
+local Runservice = game:GetService("RunService")
+
+local output = Instance.new("TextLabel")
+output.TextColor3 = Color3.new(1,1,1)
+output.BackgroundColor3 = Color3.fromRGB(58, 58, 58)
+output.Size = UDim2.new(0.4,0,0.4,0)
+output.Position = UDim2.new(0.6,0,0.6,0)
+output.TextScaled = true
+
+
+local TradeMod = Instance.new("ScreenGui")
+local ShowValues = Instance.new("Folder")
+local ValuesPOne = Instance.new("Frame")
+local ValuesPTwo = Instance.new("Frame")
+local ValuesGradientOne = Instance.new("UIGradient")
+local ValuesGradientTwo = Instance.new("UIGradient")
+local ValuesValueOne = Instance.new("TextLabel")
+local ValuesValueTwo = Instance.new("TextLabel")
+local ValuesValuesUICroner = Instance.new("UICorner")
+local Close = Instance.new("ImageButton")
+
+output.Parent = TradeMod
+
+TradeMod.Name = "TradeMod"
+ShowValues.Name = "ShowValues"
+ValuesPOne.Name = "ValuesPOne"
+ValuesPTwo.Name = "ValuesPTwo"
+Close.Name = "Close"
+
+local size = UDim2.new(0.1,0,0.1,0)
+
+Close.Size = UDim2.new(0,100,0,100)
+ValuesPOne.Size = size
+ValuesPTwo.Size = size
+
+ValuesPOne.Position = UDim2.new(0.15,0,0.37,0)
+ValuesPTwo.Position = UDim2.new(0.15,0,0.675,0)
+Close.Position = UDim2.new(0.9,0,0,0)
+
+ValuesGradientOne.Color = ColorSequence.new(Color3.fromHex("ff0000"),Color3.fromHex("b52828"))
+ValuesGradientTwo.Color = ColorSequence.new(Color3.fromHex("0037ff"),Color3.fromHex("130081"))
+ValuesGradientOne.Rotation = 45
+ValuesGradientTwo.Rotation = 45
+
+ValuesValuesUICroner.CornerRadius = UDim.new(0.5,0)
+
+ValuesValueOne.Size = UDim2.new(0.869, 0,0.797, 0)
+ValuesValueTwo.Size = UDim2.new(0.869, 0,0.797, 0)
+ValuesValueOne.Position = UDim2.new(0.074, 0,0.122, 0)
+ValuesValueTwo.Position = UDim2.new(0.074, 0,0.122, 0)
+ValuesValueOne.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+ValuesValueTwo.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+ValuesValueOne.Font = Enum.Font.Merriweather
+ValuesValueTwo.Font = Enum.Font.Merriweather
+ValuesValueOne.TextColor3 = Color3.new(1,1,1)
+ValuesValueTwo.TextColor3 = Color3.new(1,1,1)
+ValuesValueOne.TextScaled = true
+ValuesValueTwo.TextScaled = true
+ValuesValueOne.Text = "N/A"
+ValuesValueTwo.Text = "N/A"
+
+ValuesPOne.BorderColor3 = Color3.fromRGB(15, 23, 29)
+ValuesPTwo.BorderColor3 = Color3.fromRGB(15, 23, 29)
+ValuesPOne.BorderSizePixel = 3
+ValuesPTwo.BorderSizePixel = 3
+
+ValuesPOne.Visible = false
+ValuesPTwo.Visible = false
+
+Close.Image = "http://www.roblox.com/asset/?id=385868188"
+Close.BackgroundTransparency = 1
+Close.BorderSizePixel = 0
+
+TradeMod.Parent = game.Players.LocalPlayer.PlayerGui
+Close.Parent = TradeMod
+ShowValues.Parent = TradeMod
+ValuesPOne.Parent = ShowValues
+ValuesPTwo.Parent = ShowValues
+ValuesGradientOne.Parent = ValuesPOne
+ValuesGradientTwo.Parent = ValuesPTwo
+ValuesValueOne.Parent = ValuesPOne
+ValuesValueTwo.Parent = ValuesPTwo
+ValuesValuesUICroner:Clone().Parent = ValuesValueOne
+ValuesValuesUICroner.Parent = ValuesValueTwo
+
+--Functions
+
+
+function GetCurrentTrades()
+	local trade = game.Players.LocalPlayer.PlayerGui.AppUI:WaitForChild("Trade")
+	local PlayerOneOfferings = trade:WaitForChild("Offerings"):WaitForChild("Player1Offering"):WaitForChild("Cards"):GetChildren()
+	local PlayerTwoOfferings = trade:WaitForChild("Offerings"):WaitForChild("Player2Offering"):WaitForChild("Cards"):GetChildren()
+
+	local PlayerOneArray = {}
+	local PlayerTwoArray = {}
+	
+	for k,v in pairs(PlayerOneOfferings) do
+		if string.len(v.Name) >= 2 then
+			PlayerOneArray[k] = v.Title:FindFirstChild("Text").Text
+			print(k,v.Title:FindFirstChild("Text").Text)
+		else
+			PlayerOneArray[k] = "EMPTY"
+		end
+	end
+	
+	for k,v in pairs(PlayerTwoOfferings) do
+		if string.len(v.Name) >= 2 then
+			PlayerTwoArray[k] = v.Title:FindFirstChild("Text").Text
+		else
+			PlayerTwoArray[k] = "EMPTY"
+		end
+	end
+	return PlayerOneArray,PlayerTwoArray
+end
+
+
+
+--Main loop
+
+function main()
+	local AppUI = game.Players.LocalPlayer.PlayerGui:WaitForChild("AppUI")
+	if AppUI:FindFirstChild("Trade") then
+		local offeringsOne,offeringsTwo = GetCurrentTrades()
+		local t1 = ""
+		local t2 = ""
+		for k,v in pairs(offeringsOne) do
+			t1 = t1..","..v
+		end
+		for k,v in pairs(offeringsTwo) do
+			t2 = t2..","..v
+		end
+		print(t1.."  |  "..t2)
+		output.Text = (t1.."  |  "..t2)
+		ValuesPOne.Visible = true
+		ValuesPTwo.Visible = true
+	else
+		ValuesPOne.Visible = false
+		ValuesPTwo.Visible = false
+		output.Text = "trade not found"
+	end
+end
+
+local x = Runservice.Stepped:Connect(main)
+
+-- Close buton
+
+Close.MouseButton1Down:Connect(function() Close.Parent:Destroy()	TradeMod = nil	 x:Disconnect() end)
+
+--else 
+	--warn("THE GAME IS NOT SUPPORTED PLEASE SWICH TO JAILBREAK TRADING TO USE THE SCRIPT")
+--end
