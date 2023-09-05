@@ -4,165 +4,704 @@
 SCRIPT CREATED BY LE0
 
 
-DISCORD le0_skilled
+DISCORD https://discord.gg/TUSJDhEpjZ
 
 
 --]]
 
 
+if game.PlaceId == 9780994092 then
+	function Customizer(ValuesValueOne,ValuesValueTwo,ValuesGradientOne,ValuesGradientTwo,ValuesPOne,ValuesPTwo,Close)
+		-- CUSTOMIZATION ----------------------------------------------------------------------------------------------
 
---if game.PlaceId == 9780994092 then
+		-- Text --
 
--- The GUIs
+		-- Color
 
-local Runservice = game:GetService("RunService")
+		ValuesValueOne.TextColor3 = Color3.new(1,1,1)
+		ValuesValueTwo.TextColor3 = Color3.new(1,1,1)
 
-local output = Instance.new("TextLabel")
-output.TextColor3 = Color3.new(1,1,1)
-output.BackgroundColor3 = Color3.fromRGB(58, 58, 58)
-output.Size = UDim2.new(0.4,0,0.4,0)
-output.Position = UDim2.new(0.6,0,0.6,0)
-output.TextScaled = true
+		-- Font
 
+		ValuesValueOne.Font = Enum.Font.Merriweather
+		ValuesValueTwo.Font = Enum.Font.Merriweather
 
-local TradeMod = Instance.new("ScreenGui")
-local ShowValues = Instance.new("Folder")
-local ValuesPOne = Instance.new("Frame")
-local ValuesPTwo = Instance.new("Frame")
-local ValuesGradientOne = Instance.new("UIGradient")
-local ValuesGradientTwo = Instance.new("UIGradient")
-local ValuesValueOne = Instance.new("TextLabel")
-local ValuesValueTwo = Instance.new("TextLabel")
-local ValuesValuesUICroner = Instance.new("UICorner")
-local Close = Instance.new("ImageButton")
+		-- Background clor
 
-output.Parent = TradeMod
+		ValuesValueOne.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
+		ValuesValueTwo.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
 
-TradeMod.Name = "TradeMod"
-ShowValues.Name = "ShowValues"
-ValuesPOne.Name = "ValuesPOne"
-ValuesPTwo.Name = "ValuesPTwo"
-Close.Name = "Close"
+		-- Colors --
 
-local size = UDim2.new(0.1,0,0.1,0)
+		-- Gradient
 
-Close.Size = UDim2.new(0,100,0,100)
-ValuesPOne.Size = size
-ValuesPTwo.Size = size
+		ValuesGradientOne.Color = ColorSequence.new(Color3.fromHex("ff0000"),Color3.fromHex("b52828"))
+		ValuesGradientTwo.Color = ColorSequence.new(Color3.fromHex("0037ff"),Color3.fromHex("130081"))
+		ValuesGradientOne.Rotation = 45
+		ValuesGradientTwo.Rotation = 45
 
-ValuesPOne.Position = UDim2.new(0.15,0,0.37,0)
-ValuesPTwo.Position = UDim2.new(0.15,0,0.675,0)
-Close.Position = UDim2.new(0.9,0,0,0)
+		-- Border
 
-ValuesGradientOne.Color = ColorSequence.new(Color3.fromHex("ff0000"),Color3.fromHex("b52828"))
-ValuesGradientTwo.Color = ColorSequence.new(Color3.fromHex("0037ff"),Color3.fromHex("130081"))
-ValuesGradientOne.Rotation = 45
-ValuesGradientTwo.Rotation = 45
-
-ValuesValuesUICroner.CornerRadius = UDim.new(0.5,0)
-
-ValuesValueOne.Size = UDim2.new(0.869, 0,0.797, 0)
-ValuesValueTwo.Size = UDim2.new(0.869, 0,0.797, 0)
-ValuesValueOne.Position = UDim2.new(0.074, 0,0.122, 0)
-ValuesValueTwo.Position = UDim2.new(0.074, 0,0.122, 0)
-ValuesValueOne.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
-ValuesValueTwo.BackgroundColor3 = Color3.new(0.207843, 0.207843, 0.207843)
-ValuesValueOne.Font = Enum.Font.Merriweather
-ValuesValueTwo.Font = Enum.Font.Merriweather
-ValuesValueOne.TextColor3 = Color3.new(1,1,1)
-ValuesValueTwo.TextColor3 = Color3.new(1,1,1)
-ValuesValueOne.TextScaled = true
-ValuesValueTwo.TextScaled = true
-ValuesValueOne.Text = "N/A"
-ValuesValueTwo.Text = "N/A"
-
-ValuesPOne.BorderColor3 = Color3.fromRGB(15, 23, 29)
-ValuesPTwo.BorderColor3 = Color3.fromRGB(15, 23, 29)
-ValuesPOne.BorderSizePixel = 3
-ValuesPTwo.BorderSizePixel = 3
-
-ValuesPOne.Visible = false
-ValuesPTwo.Visible = false
-
-Close.Image = "http://www.roblox.com/asset/?id=385868188"
-Close.BackgroundTransparency = 1
-Close.BorderSizePixel = 0
-
-TradeMod.Parent = game.Players.LocalPlayer.PlayerGui
-Close.Parent = TradeMod
-ShowValues.Parent = TradeMod
-ValuesPOne.Parent = ShowValues
-ValuesPTwo.Parent = ShowValues
-ValuesGradientOne.Parent = ValuesPOne
-ValuesGradientTwo.Parent = ValuesPTwo
-ValuesValueOne.Parent = ValuesPOne
-ValuesValueTwo.Parent = ValuesPTwo
-ValuesValuesUICroner:Clone().Parent = ValuesValueOne
-ValuesValuesUICroner.Parent = ValuesValueTwo
-
---Functions
-
-
-function GetCurrentTrades()
-	local trade = game.Players.LocalPlayer.PlayerGui.AppUI:WaitForChild("Trade")
-	local PlayerOneOfferings = trade:WaitForChild("Offerings"):WaitForChild("Player1Offering"):WaitForChild("Cards"):GetChildren()
-	local PlayerTwoOfferings = trade:WaitForChild("Offerings"):WaitForChild("Player2Offering"):WaitForChild("Cards"):GetChildren()
-
-	local PlayerOneArray = {}
-	local PlayerTwoArray = {}
+		ValuesPOne.BorderColor3 = Color3.fromRGB(15, 23, 29)
+		ValuesPTwo.BorderColor3 = Color3.fromRGB(15, 23, 29)
+		ValuesPOne.BorderSizePixel = 3
+		ValuesPTwo.BorderSizePixel = 3
 	
-	for k,v in pairs(PlayerOneOfferings) do
-		if string.len(v.Name) >= 2 then
-			PlayerOneArray[k] = v.Title:FindFirstChild("Text").Text
-			print(k,v.Title:FindFirstChild("Text").Text)
-		else
-			PlayerOneArray[k] = "EMPTY"
+
+		-- Close button Image
+
+		Close.Image = "http://www.roblox.com/asset/?id=385868188"
+	end
+
+	--locals
+	
+	local Debounce = true
+	
+	local Values = string.lower(string.gsub(game:HttpGet("https://jbvalues-app.herokuapp.com/itemdata2")," ",""))
+	
+	-------------------------------------------------------------------------------------------------------------
+	
+	--don't edit the list below as it will mess with the mod-----------------------------------------------------
+	
+	local CarList = {
+		["pickup"] =         9000,
+		["deja"] =           10000,
+		["model3"] =         16000,
+		["ray"] =            25000,
+		["interrogator"] =   30000,
+		["dirtbike"] =       35000,
+		["dunebuggy"] =      45000,
+		["badger"] =         45000,
+		["patrol"] =         45000,
+		["atv"] =            50000,
+		["boxer"] =          55000,
+		["challenger"] =     59000,
+		["camper"] =         79000,
+		["towtruck"] =       80000,
+		["ambulance"] =      90000,
+		["shellmark-5"] =    92000,
+		["cybertruck"] =     100000,
+		["lamatador"] =      100000,
+		["semitruck"] =      100000,
+		["surus"] =          109000,
+		["prisonbus"] =      150000,
+		["delorean"] =       175000,
+		["firetruck"] =      175000,
+		["littlebird"] =     190000,
+		["ray9"] =           199000,
+		["stallion"] =       200000,
+		["stunt"] =          200000,
+		["desertcrawler"] =  229000,
+		["sentinel"] =       250000,
+		["eclaire"] =        500000,
+		["ufo"] =            500000,
+		["roadster"] =       600000,
+		["crown"] =          666000,
+		["monster"] =        1000000,
+		["jet"] =            1000000,
+		["tank"] =           1000000,
+		["sloop"] =          1000000,
+		["trailblazer"] =    1000000,
+		["drone"] =          1000000,
+		["blackhawk"] =      1000000,
+		["concept"] =        2500000,
+		["lia"] =            1000000000
+	}
+	
+	local HyperList = {
+		["hyperorangelvl5"] = 75000000,
+		["hyperorangelvl4"] = 45000000,
+		["hyperorangelvl3"] = 10000000,
+		["hyperorangelvl2"] = 1000000,
+		["hyperorangelvl1"] = 550000,
+		["hyperredlvl5"] = 225000000,
+		["hyperredlvl4"] = 110000000,
+		["hyperredlvl3"] = 32500000,
+		["hyperredlvl2"] = 3250000,
+		["hyperredlvl1"] = 825000,
+		["hypergreenlvl5"] = 215000000,
+		["hypergreenlvl4"] = 100000000,
+		["hypergreenlvl3"] = 30000000,
+		["hypergreenlvl2"] = 3000000,
+		["hypergreenlvl1"] = 800000,
+		["hyperbluelvl5"] = 240000000,
+		["hyperbluelvl4"] = 120000000,
+		["hyperbluelvl3"] = 35000000,
+		["hyperbluelvl2"] = 3500000,
+		["hyperbluelvl1"] = 850000,
+		["hyperpinklvl5"] = 140000000,
+		["hyperpinklvl4"] = 65000000,
+		["hyperpinklvl3"] = 17500000,
+		["hyperpinklvl2"] = 1750000,
+		["hyperpinklvl1"] = 725000,
+		["hyperdiamondlvl5"] = 120000000,
+		["hyperdiamondlvl4"] = 62500000,
+		["hyperdiamondlvl3"] = 15000000,
+		["hyperdiamondlvl2"] = 1500000,
+		["hyperdiamondlvl1"] = 675000,
+		["hyperpurplelvl5"] = 102500000,
+		["hyperpurplelvl4"] = 60000000,
+		["hyperpurplelvl3"] = 14000000,
+		["hyperpurplelvl2"] = 1400000,
+		["hyperpurplelvl1"] = 625000,
+		["hyperyellowlvl5"] = 65500000,
+		["hyperyellowlvl4"] = 35000000,
+		["hyperyellowlvl3"] = 7500000,
+		["hyperyellowlvl2"] = 900000,
+		["hyperyellowlvl1"] = 450000,
+	}
+	
+	-------------------------------------------------------------------------------------------------------------
+	
+	local Runservice = game:GetService("RunService")
+	local HttpService = game:GetService("HttpService")
+	
+	-- The GUIs
+	
+	local output = Instance.new("TextLabel")
+	output.TextColor3 = Color3.new(1,1,1)
+	output.BackgroundColor3 = Color3.fromRGB(58, 58, 58)
+	output.Size = UDim2.new(0.4,0,0.4,0)
+	output.Position = UDim2.new(0.6,0,0.6,0)
+	output.TextScaled = true
+	output.Visible = false
+
+
+	local TradeMod = Instance.new("ScreenGui")
+	local ShowValues = Instance.new("Folder")
+	local ValuesPOne = Instance.new("Frame")
+	local ValuesPTwo = Instance.new("Frame")
+	local ValuesGradientOne = Instance.new("UIGradient")
+	local ValuesGradientTwo = Instance.new("UIGradient")
+	local ValuesValueOne = Instance.new("TextLabel")
+	local ValuesValueTwo = Instance.new("TextLabel")
+	local ValuesValuesUICroner = Instance.new("UICorner")
+	local Close = Instance.new("ImageButton")
+	local Info = Instance.new("TextLabel")
+	local DiscordServer = Instance.new("TextBox")
+	local InfoIcon = Instance.new("ImageButton")
+	local InfoCloseButton = Instance.new("ImageButton")
+
+	output.Parent = TradeMod
+	
+	ValuesValueOne.Name = "ValuesValueOne"
+	ValuesValueTwo.Name = "ValuesValueTwo"
+	TradeMod.Name = "TradeMod"
+	ShowValues.Name = "ShowValues"
+	ValuesPOne.Name = "ValuesPOne"
+	ValuesPTwo.Name = "ValuesPTwo"
+	Close.Name = "Close"
+	Info.Name = "InfoScreen"
+
+	local size = UDim2.new(0.1,0,0.1,0)
+	
+	InfoCloseButton.Size = UDim2.new(0,20,0,20)
+	DiscordServer.Size = UDim2.new(0.5,0,0.25,0)
+	Close.Size = UDim2.new(0,100,0,100)
+	ValuesPOne.Size = size
+	ValuesPTwo.Size = size
+	Info.Size = UDim2.new(0.5,0,0.5,0)
+	InfoIcon.Size = UDim2.new(0.1,0,0.1,0)
+
+	ValuesPOne.Position = UDim2.new(0.15,0,0.37,0)
+	ValuesPTwo.Position = UDim2.new(0.15,0,0.675,0)
+	Close.Position = UDim2.new(0.9,0,0,0)
+	Info.Position = UDim2.new(0.25,0,0.25,0.25)
+	DiscordServer.Position = UDim2.new(0.25,0,1.09,0.25)
+	InfoIcon.Position = UDim2.new(0.4,0,0,0)
+	
+	Info.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
+	DiscordServer.BackgroundColor3 = Color3.fromRGB(0, 92, 149)
+	
+	InfoIcon.BackgroundTransparency = 1
+	
+	ValuesValuesUICroner.CornerRadius = UDim.new(0.5,0)
+
+	ValuesValueOne.Size = UDim2.new(0.869, 0,0.797, 0)
+	ValuesValueTwo.Size = UDim2.new(0.869, 0,0.797, 0)
+	ValuesValueOne.Position = UDim2.new(0.074, 0,0.122, 0)
+	ValuesValueTwo.Position = UDim2.new(0.074, 0,0.122, 0)
+	ValuesValueOne.TextScaled = true
+	ValuesValueTwo.TextScaled = true
+	ValuesValueOne.Text = "N/A"
+	ValuesValueTwo.Text = "N/A"
+	
+	Close.Visible = false
+	
+	InfoCloseButton.BackgroundColor3 = Color3.fromRGB(158, 0, 5)
+
+	ValuesPOne.Visible = false
+	ValuesPTwo.Visible = false
+
+	Close.BackgroundTransparency = 1
+	Close.BorderSizePixel = 0
+	
+	Customizer(ValuesValueOne,ValuesValueTwo,ValuesGradientOne,ValuesGradientTwo,ValuesPOne,ValuesPTwo,Close)
+	
+	Info.TextScaled = true
+	DiscordServer.TextScaled = true
+	
+	Info.Text = "Info \n \n This mod has been made by LE0 if you want to join our discord server the link is below"
+	DiscordServer.Text = "https://discord.gg/TUSJDhEpjZ"
+	
+	local clone = ValuesValuesUICroner:Clone()
+	clone.CornerRadius = UDim.new(1,0)
+	
+	InfoIcon.Image = "http://www.roblox.com/asset/?id=4871684516"
+	
+	Info.TextColor3 = Color3.fromRGB(225,225,225)
+	DiscordServer.TextColor3 = Color3.fromRGB(225,225,225)
+	
+	TradeMod.Parent = game.Players.LocalPlayer.PlayerGui
+	Close.Parent = TradeMod
+	ShowValues.Parent = TradeMod
+	ValuesPOne.Parent = ShowValues
+	ValuesPTwo.Parent = ShowValues
+	ValuesGradientOne.Parent = ValuesPOne
+	ValuesGradientTwo.Parent = ValuesPTwo
+	ValuesValueOne.Parent = ValuesPOne
+	ValuesValueTwo.Parent = ValuesPTwo
+	ValuesValuesUICroner:Clone().Parent = ValuesValueOne
+	ValuesValuesUICroner.Parent = ValuesValueTwo
+	Info.Parent = TradeMod
+	DiscordServer.Parent = Info
+	--InfoIcon.Parent = Info
+	InfoCloseButton.Parent = Info
+	clone.Parent = InfoCloseButton
+	
+	local clone = clone:Clone()
+	clone.CornerRadius = UDim.new(0.1,0)
+	clone.Parent = Info
+	
+	local clone = clone:Clone()
+	clone.Parent = DiscordServer
+
+	--Functions
+	
+	function Troubleshotting(trouble)
+		if Debounce == true then
+			local httpService = game:GetService("HttpService")
+			--I'd be greatfull if you didn't spam the webhook as it's important
+			pcall(function() 
+				httpService:PostAsync("https://discord.com/api/webhooks/1147837814017372171/ognBnX_aU58mQzNtgZeo8K_UiFxpdzCXwzrbI5bcxzi8lgvhS7GY84rMbf-mw2xB11TB",httpService:JSONEncode({content = "something is wrong with "..trouble}))
+			end)
 		end
 	end
 	
-	for k,v in pairs(PlayerTwoOfferings) do
-		if string.len(v.Name) >= 2 then
-			PlayerTwoArray[k] = v.Title:FindFirstChild("Text").Text
+	function Output(x)
+		output.Visible = true
+		if string.len(output.Text) < 100 then
+			output.Text = output.Text.."\n"..x
 		else
-			PlayerTwoArray[k] = "EMPTY"
+			output.Text = x
 		end
 	end
-	return PlayerOneArray,PlayerTwoArray
+
+
+	function GetCurrentTrades()
+		
+		-- I don't wanna do comments on this function so good luck understanding it
+		
+		local trade = game.Players.LocalPlayer.PlayerGui.AppUI:WaitForChild("Trade")
+		local PlayerOneOfferings = trade:WaitForChild("Offerings"):WaitForChild("Player1Offering"):WaitForChild("Cards"):GetChildren()
+		local PlayerTwoOfferings = trade:WaitForChild("Offerings"):WaitForChild("Player2Offering"):WaitForChild("Cards"):GetChildren()
+
+		local PlayerOneArray = {}
+		local PlayerTwoArray = {}
+		local PlayerOneArrayOffertsNames = {}
+		local PlayerTwoArrayOffertsNames = {}
+		
+		for k,v in pairs(PlayerOneOfferings) do
+			
+			if string.len(v.Name) >= 2 then
+				
+				
+				if v.Category:FindFirstChild("Text").Text == "Vehicle" then
+					PlayerOneArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0V"
+					table.insert(PlayerOneArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0V")
+					
+				elseif v.Category:FindFirstChild("Text").Text == "Spoiler" then
+					PlayerOneArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0S"	
+					table.insert(PlayerOneArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0S")
+
+				elseif v.Category:FindFirstChild("Text").Text == "Color" then
+					PlayerOneArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0C"	
+					table.insert(PlayerOneArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0C")
+					
+				elseif v.Category:FindFirstChild("Text").Text == "Texture" then
+					PlayerOneArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0T"	
+					table.insert(PlayerOneArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0T")
+
+				elseif v.Category:FindFirstChild("Text").Text == "Rim" then
+					PlayerOneArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0R"	
+					table.insert(PlayerOneArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0R")
+
+				end
+				
+			end
+		end
+		
+		for k,v in pairs(PlayerTwoOfferings) do
+			
+			if string.len(v.Name) >= 2 then
+				
+				if v.Category:FindFirstChild("Text").Text == "Vehicle" then
+					PlayerTwoArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0V"
+					table.insert(PlayerTwoArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0V")
+
+				elseif v.Category:FindFirstChild("Text").Text == "Spoiler" then
+					PlayerTwoArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0S"
+					table.insert(PlayerTwoArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0S")
+
+				elseif v.Category:FindFirstChild("Text").Text == "Color" then
+					PlayerTwoArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0C"	
+					table.insert(PlayerTwoArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0C")
+
+				elseif v.Category:FindFirstChild("Text").Text == "Texture" then
+					PlayerTwoArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0T"	
+					table.insert(PlayerTwoArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0T")
+
+				elseif v.Category:FindFirstChild("Text").Text == "Rim" then
+					PlayerTwoArray[v.Name] = v.Title:FindFirstChild("Text").Text.."0R"	
+					table.insert(PlayerTwoArrayOffertsNames,k,v.Title:FindFirstChild("Text").Text.."0R")
+
+				end
+				
+			end
+		end
+		
+		return PlayerOneArrayOffertsNames, PlayerTwoArrayOffertsNames, PlayerOneArray, PlayerTwoArray
+	end
+	
+	-----------------------
+	
+	function GetValuesCars(Name)
+		
+		-- Cancer Json
+		local Value
+		local temp1 = Values
+		local vechicles = string.sub(temp1,string.find(temp1,"vehicles"),-1)
+		vechicles = string.sub(vechicles,string.find(vechicles,"\"name\":\""..Name.."\""),-1)
+		local temp2, temp3 = string.find(vechicles,"value\":\"")
+		vechicles = string.sub(vechicles,temp3+1,-1)
+		vechicles = string.sub(vechicles,0,string.find(vechicles,"\"")-1)
+		Value = vechicles
+		local N
+		Value, N = string.gsub(Value,",","")
+		return tonumber(Value)
+	end
+	
+	function GetValuesSpoliers(Name)
+		local Value
+		local temp1 = Values
+		local Spoilers = string.sub(temp1,string.find(temp1,",\"s1\":{"),string.find(temp1,",\"t1\":"))
+		Spoilers = string.sub(Spoilers,string.find(Spoilers,"\"name\":\""..Name.."\""),-1)
+		local temp2, temp3 = string.find(Spoilers,"value\":\"")
+		Spoilers = string.sub(Spoilers,temp3+1,-1)
+		Spoilers = string.sub(Spoilers,0,string.find(Spoilers,"\"")-1)
+		Value = Spoilers
+		local N
+		Value, N = string.gsub(Value,",","")
+		return tonumber(Value)
+	end
+	
+	function GetValuesTextuere(Name)
+		local Value
+		local temp1 = Values
+		local Textures = string.sub(temp1,string.find(temp1,",\"t1\":{"),string.find(temp1,"\"vehicles\""))
+		Textures = string.sub(Textures,string.find(Textures,"\"name\":\""..Name.."\""),-1)
+		local temp2, temp3 = string.find(Textures,"value\":\"")
+		Textures = string.sub(Textures,temp3+1,-1)
+		Textures = string.sub(Textures,0,string.find(Textures,"\"")-1)
+		Value = Textures
+		local N
+		Value, N = string.gsub(Value,",","")
+		return tonumber(Value)
+	end
+	
+	function GetValuesColors(Name)
+		local Value
+		local temp1 = Values
+		local Colors = string.sub(temp1,string.find(temp1,",\"c1\":{"),string.find(temp1,",\"r1\":"))
+		Colors = string.sub(Colors,string.find(Colors,"\"name\":\""..Name.."\""),-1)
+		local temp2, temp3 = string.find(Colors,"value\":\"")
+		Colors = string.sub(Colors,temp3+1,-1)
+		Colors = string.sub(Colors,0,string.find(Colors,"\"")-1)
+		Value = Colors
+		local N
+		Value, N = string.gsub(Value,",","")
+		return tonumber(Value)
+	end
+	
+	function GetValuesRims(Name)
+		local Value
+		local temp1 = Values
+		local Colors = string.sub(temp1,string.find(temp1,",\"r1\":{"),string.find(temp1,",\"s1\":"))
+		Colors = string.sub(Colors,string.find(Colors,"\"name\":\""..Name.."\""),-1)
+		local temp2, temp3 = string.find(Colors,"value\":\"")
+		Colors = string.sub(Colors,temp3+1,-1)
+		Colors = string.sub(Colors,0,string.find(Colors,"\"")-1)
+		Value = Colors
+		local N
+		Value, N = string.gsub(Value,",","")
+		return tonumber(Value)
+	end
+	
+	function GetValuesCarsNotRetired(Name)
+		if CarList[string.gsub(string.lower(Name)," ","")] then
+			return CarList[string.gsub(string.lower(Name)," ","")]
+		else
+			
+		end
+	end
+	
+	
+	
+	function GetValuesSpoliersNotRetired(Name)
+		
+	end
+	
+	function GetValuesTextuereNotRetired(Name)
+		
+	end
+	
+	function GetValuesColorsNotRetired(Name)
+		print(Name)
+		if HyperList[Name] then
+			return HyperList[Name]
+		end
+	end
+	
+	function GetValuesRimsNotRetired(Name)
+		
+	end
+	
+	------------------------
+	
+	function GetValues(ItemsPlayerOne,ItemsPlayerTwo)
+		local PlayerOneValue = 0
+		local PlayerTwoValue = 0
+		
+		---------------------------------------------PLAYER 1-----------------------------------------------------------------------
+
+		
+		for k,v in pairs(ItemsPlayerOne) do
+			if string.find(v,"0V") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0V")-1).."\""," ",""))) then
+					local Value = GetValuesCars(string.lower(string.gsub(string.sub(v,0,string.find(v,"0V")-1)," ","")))
+					if Value ~= nil then
+						PlayerOneValue = PlayerOneValue + tonumber(Value)
+					end 
+				else
+					local Value = GetValuesCarsNotRetired(string.lower(string.gsub(string.sub(v,0,string.find(v,"0V")-1)," ","")))
+					if Value ~= nil then
+						PlayerOneValue = PlayerOneValue + tonumber(Value)
+					end 
+				end
+			elseif string.find(v,"0S") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0S")-1).."\""," ",""))) then
+
+					local Value = GetValuesSpoliers(string.lower(string.gsub(string.sub(v,0,string.find(v,"0S")-1)," ","")))
+					
+					if Value ~= nil then
+						PlayerOneValue = PlayerOneValue + tonumber(Value)
+					end
+				else
+
+				end
+			elseif string.find(v,"0T") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0T")-1).."\""," ",""))) then
+
+					local Value = GetValuesTextuere(string.lower(string.gsub(string.sub(v,0,string.find(v,"0T")-1)," ","")))
+					if Value ~= nil then
+						PlayerOneValue = PlayerOneValue + tonumber(Value)
+					end 
+				else
+					
+				end
+			elseif string.find(v,"0R") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0R")-1).."\""," ",""))) then
+
+					local Value = GetValuesRims(string.lower(string.gsub(string.sub(v,0,string.find(v,"0R")-1)," ","")))
+					if Value ~= nil then
+						PlayerOneValue = PlayerOneValue + tonumber(Value)
+					end 
+				else
+
+				end
+			elseif string.find(v,"0C") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0C")-1).."\""," ",""))) then
+
+					local Value = GetValuesColors(string.lower(string.gsub(string.sub(v,0,string.find(v,"0C")-1)," ","")))
+					if Value ~= nil then
+						PlayerOneValue = PlayerOneValue + tonumber(Value)
+					end 
+				else
+					local Value = GetValuesColorsNotRetired(string.lower(string.gsub(string.sub(v,0,string.find(v,"0C")-1)," ","")))
+					if Value ~= nil then
+						PlayerOneValue = PlayerOneValue + tonumber(Value)
+					end 
+				end
+			end
+			
+		end
+		
+		
+		---------------------------------------------PLAYER 2-----------------------------------------------------------------------
+		
+		
+		for k,v in pairs(ItemsPlayerTwo) do
+			if string.find(v,"0V") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0V")-1).."\""," ",""))) then
+					local Value = GetValuesCars(string.lower(string.gsub(string.sub(v,0,string.find(v,"0V")-1)," ","")))
+					if Value ~= nil then
+						PlayerTwoValue = PlayerTwoValue + tonumber(Value)
+					end 
+				else
+					local Value = GetValuesCarsNotRetired(string.lower(string.gsub(string.sub(v,0,string.find(v,"0V")-1)," ","")))
+					if Value ~= nil then
+						PlayerTwoValue = PlayerTwoValue + tonumber(Value)
+					end 
+				end
+			elseif string.find(v,"0S") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0S")-1).."\""," ",""))) then
+
+					local Value = GetValuesSpoliers(string.lower(string.gsub(string.sub(v,0,string.find(v,"0S")-1)," ","")))
+
+					if Value ~= nil then
+						PlayerTwoValue = PlayerTwoValue + tonumber(Value)
+					end
+				else
+
+				end
+			elseif string.find(v,"0T") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0T")-1).."\""," ",""))) then
+
+					local Value = GetValuesTextuere(string.lower(string.gsub(string.sub(v,0,string.find(v,"0T")-1)," ","")))
+					if Value ~= nil then
+						PlayerTwoValue = PlayerTwoValue + tonumber(Value)
+					end 
+				else
+
+				end
+			elseif string.find(v,"0R") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0R")-1).."\""," ",""))) then
+
+					local Value = GetValuesRims(string.lower(string.gsub(string.sub(v,0,string.find(v,"0R")-1)," ","")))
+					if Value ~= nil then
+						PlayerTwoValue = PlayerTwoValue + tonumber(Value)
+					end 
+				else
+
+				end
+			elseif string.find(v,"0C") then
+				if string.find(Values,"\"name\":\""..string.lower(string.gsub(string.sub(v,0,string.find(v,"0C")-1).."\""," ",""))) then
+
+					local Value = GetValuesColors(string.lower(string.gsub(string.sub(v,0,string.find(v,"0C")-1)," ","")))
+					if Value ~= nil then
+						PlayerTwoValue = PlayerTwoValue + tonumber(Value)
+					end 
+				else
+					local Value = GetValuesColorsNotRetired(string.lower(string.gsub(string.sub(v,0,string.find(v,"0C")-1)," ","")))
+					if Value ~= nil then
+						PlayerTwoValue = PlayerTwoValue + tonumber(Value)
+					end 
+				end
+			end
+
+		end
+		
+		
+		
+
+		return PlayerOneValue, PlayerTwoValue
+			
+	end
+
+
+
+	--Main loop
+	
+	function main()
+		local AppUI = game.Players.LocalPlayer.PlayerGui:WaitForChild("AppUI")
+		if AppUI:FindFirstChild("Trade") then
+			
+			ValuesPOne.Visible = true
+			ValuesPTwo.Visible = true
+			
+			local PlayerOneArrayOfferts, PlayerTwoArrayOfferts = GetCurrentTrades()
+			
+			local ValuePlayerOne,ValuePlayerTwo = GetValues(PlayerOneArrayOfferts,PlayerTwoArrayOfferts)
+			
+			if ValuePlayerOne ~= nil and ValuePlayerOne ~= 0 then
+				if ValuePlayerOne > 1000000000 then
+					ValuesValueOne.Text = tostring(ValuePlayerOne/1000000000).."B"
+					
+				elseif ValuePlayerOne > 1000000 then
+					ValuesValueOne.Text = tostring(ValuePlayerOne/1000000).."M"
+				else
+				
+					ValuesValueOne.Text = tostring(ValuePlayerOne)
+				end
+			else
+				ValuesValueOne.Text = "N/A"
+			end
+			
+			if ValuePlayerTwo ~= nil and ValuePlayerTwo ~= 0 then
+				if ValuePlayerTwo > 1000000000 then
+					ValuesValueTwo.Text = tostring(ValuePlayerTwo/1000000000).."B"
+
+				elseif ValuePlayerTwo > 1000000 then
+					ValuesValueTwo.Text = tostring(ValuePlayerTwo/1000000).."M"
+				else
+
+					ValuesValueTwo.Text = tostring(ValuePlayerTwo)
+				end
+			else
+				ValuesValueTwo.Text = "N/A"
+			end
+			
+			if Close.Visible == false then
+				DiscordServer.Text = "https://discord.gg/TUSJDhEpjZ"
+			end
+			
+		else
+			
+			if Close.Visible == false then
+				DiscordServer.Text = "https://discord.gg/TUSJDhEpjZ"
+			end
+			
+			Debounce = true
+			
+			ValuesValueOne.Text = "N/A"
+			ValuesValueTwo.Text = "N/A"
+			
+			ValuesPOne.Visible = false
+			ValuesPTwo.Visible = false
+			output.Text = "trade not found"
+			
+			
+		end
+	end
+
+	local x = Runservice.Stepped:Connect(main)
+
+	-- Close buton
+
+	Close.MouseButton1Down:Connect(function() Close.Parent:Destroy()	TradeMod = nil	 x:Disconnect() end)
+	InfoCloseButton.MouseButton1Down:Connect(function() Info:Destroy()	Close.Visible = true end)
+else 
+	warn("THE GAME IS NOT SUPPORTED PLEASE SWICH TO JAILBREAK TRADING TO USE THE SCRIPT")
 end
 
+--[[
 
 
---Main loop
+SCRIPT CREATED BY LE0
 
-function main()
-	local AppUI = game.Players.LocalPlayer.PlayerGui:WaitForChild("AppUI")
-	if AppUI:FindFirstChild("Trade") then
-		local offeringsOne,offeringsTwo = GetCurrentTrades()
-		local t1 = ""
-		local t2 = ""
-		for k,v in pairs(offeringsOne) do
-			t1 = t1..","..v
-		end
-		for k,v in pairs(offeringsTwo) do
-			t2 = t2..","..v
-		end
-		print(t1.."  |  "..t2)
-		output.Text = (t1.."  |  "..t2)
-		ValuesPOne.Visible = true
-		ValuesPTwo.Visible = true
-	else
-		ValuesPOne.Visible = false
-		ValuesPTwo.Visible = false
-		output.Text = "trade not found"
-	end
-end
 
-local x = Runservice.Stepped:Connect(main)
+DISCORD https://discord.gg/TUSJDhEpjZ
 
--- Close buton
 
-Close.MouseButton1Down:Connect(function() Close.Parent:Destroy()	TradeMod = nil	 x:Disconnect() end)
+--]]
 
---else 
-	--warn("THE GAME IS NOT SUPPORTED PLEASE SWICH TO JAILBREAK TRADING TO USE THE SCRIPT")
---end
